@@ -29,10 +29,7 @@ const getOriginalUrl = async (req, res) => {
     try {
         const short_url = req.params.shorturl;
         const url = await UrlModel.findOne({ short_url })
-        res.writeHead(301, {
-            Location: url.original_url
-          }).end();
-        //res.status(201).json({ message: url.original_url })
+        res.redirect(url.original_url)
     } catch (error) {
         res.status(500).json({ error })
     }
