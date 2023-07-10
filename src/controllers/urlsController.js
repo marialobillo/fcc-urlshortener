@@ -19,6 +19,7 @@ const createShortUrl = async (req, res) => {
                         short_url: url.short_url 
                     }) 
                 } 
+                if(error) res.status(200).json({ error: 'invalid url' })
             })
     } catch (error) {  
         res.status(500).json({ error: 'invalid url' })
