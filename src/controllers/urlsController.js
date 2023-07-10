@@ -55,7 +55,7 @@ const getOriginalUrl = async (req, res) => {
         });
         res.end();
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        res.status(500).json({ error: error.message })
     } finally {
         await client.disconnect();
     }
