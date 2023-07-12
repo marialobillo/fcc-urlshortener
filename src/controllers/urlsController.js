@@ -4,26 +4,28 @@ const client = require('../db/redis');
 
 const createShortUrl = async (req, res) => {
     try {
-        const url = new URL(req.body.url);
-        const hostnameURL = url.hostname;
-        dns.lookup(
-            hostnameURL, 
-            async (error) => {
-                if (!error) { 
-                    const urlCounter = await UrlModel.countDocuments()
-                    const url = await UrlModel.create({ 
-                        original_url: req.body.url,
-                        short_url: urlCounter + 1
-                    })
-                    res.status(201).json({ 
-                        original_url: url.original_url, 
-                        short_url: url.short_url 
-                    }) 
-                } 
-                if(error) res.status(200).json({ error: 'invalid url' })
-            })
-    } catch (error) {  
-        res.status(500).json({ error: 'invalid url' })
+        //const urlRegex = new RegExp('(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?')
+        const url_requested = new URL(req.body.url);
+        const hostnameURL = url_requested.hostname;
+
+        await dns.lookup(hostnameURL, (error) => {
+            if(error){
+                return res.status(200).json({ error: 'invalid url'}) 
+            } 
+        })
+         
+        const urlCounter = await UrlModel.countDocuments()
+        const url = await UrlModel.create({ 
+            original_url: req.body.url,
+            short_url: urlCounter + 1
+        })
+        res.status(201).json({ 
+            original_url: url.original_url, 
+            short_url: url.short_url 
+        }) 
+        
+    } catch (error) { 
+        res.status(200).json({ error: 'invalid url' })
     }
 }
 
