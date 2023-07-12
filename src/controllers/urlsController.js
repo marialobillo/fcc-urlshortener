@@ -4,7 +4,6 @@ const client = require('../db/redis');
 
 const createShortUrl = async (req, res) => {
     try {
-        //const urlRegex = new RegExp('(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?')
         const url_requested = new URL(req.body.url);
         const hostnameURL = url_requested.hostname;
 
