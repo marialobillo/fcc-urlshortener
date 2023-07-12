@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const { connectRedisClient } = require("./src/db/redis");
 
 
 // Basic Configuration
@@ -35,6 +36,7 @@ app.get('/api/hello', function(req, res) {
 const start = async () => {
   try {
       await connectDB(process.env.MONGO_URI)
+      await connectRedisClient()
       app.listen(process.env.PORT || port, () => {
         console.log('Your app is listening on port ' + port)
       })
