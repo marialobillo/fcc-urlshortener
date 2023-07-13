@@ -51,4 +51,4 @@ async function doingSomethingCritical() {
 Resources:
 - [Nodejs Race Conditions by Luciano Mammino](https://www.nodejsdesignpatterns.com/blog/node-js-race-conditions/)
 - [async-mutex](https://www.npmjs.com/package/async-mutex)
-```
+
