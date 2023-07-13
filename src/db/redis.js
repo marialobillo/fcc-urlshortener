@@ -1,12 +1,12 @@
-const { createClient } = require('redis');
+const { createClient } = require("redis");
 
 const client = createClient();
 
 const connectRedisClient = async () => {
-    await client.connect()
-}
+  await client.connect();
+};
 
 module.exports = {
-    connectRedisClient,
-    client,
+  connectRedisClient,
+  client,
 };

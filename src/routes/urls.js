@@ -1,12 +1,12 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 const {
-    getOriginalUrl,
-    createShortUrl,
-} = require('../controllers/urlsController')
+  getOriginalUrl,
+  createShortUrl,
+} = require("../controllers/urlsController");
 
-router.route('/:shorturl').get(getOriginalUrl)
-router.route('/').post(createShortUrl)
+router.route("/:shorturl").get(getOriginalUrl);
+router.route("/").post(createShortUrl);
 
-module.exports = router 
+module.exports = router;

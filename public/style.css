@@ -16,8 +16,6 @@ h3 {
   margin-top: 30px;
 }
 
-
-
 .user-stories li {
   margin-bottom: 1em;
 }
@@ -40,7 +38,7 @@ input {
   padding: 5px;
 }
 
-input[type='text'] {
+input[type="text"] {
   width: 220px;
   text-align: center;
 }

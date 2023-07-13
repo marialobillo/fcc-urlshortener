@@ -2,16 +2,14 @@
 
 This is the boilerplate code for the URL Shortener Microservice project. Instructions for building your project can be found at https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/url-shortener-microservice.
 
-
 ## Current Implementation Issues
 
-* We have not written any tests for our application. We could miss some cases and bugs.
-* I think we could have several simultaneous requests to our application. This could lead to a race condition.
+- We have not written any tests for our application. We could miss some cases and bugs.
+- I think we could have several simultaneous requests to our application. This could lead to a race condition.
 
 ## Race Condition
 
 Even when Node.js is single-threaded we could have race condition on our project. This is because we are using a database to store our data. The database is not single-threaded. So, we could have several simultaneous requests to our application. This could lead to a race condition.
-
 
 ## Solution 1 - Using Async/Await
 
@@ -37,19 +35,20 @@ Another possible solution is using Mutex, which is a synchronization primitive t
 
 import { Mutex } from 'async-mutex'
 
-const mutex = new Mutex() 
+const mutex = new Mutex()
 
 async function doingSomethingCritical() {
-  const release = await mutex.acquire() 
+  const release = await mutex.acquire()
   try {
     // ... do something here
   } finally {
-    release() 
+    release()
   }
 }
 
 ´´´
 
-Resources: 
+Resources:
 - [Nodejs Race Conditions by Luciano Mammino](https://www.nodejsdesignpatterns.com/blog/node-js-race-conditions/)
-- [Nodejs Race Conditions by Riddhesh Ganatra](https://riddheshganatra.medium.com/node-js-race-conditions-69b21b54a1e1)
+- [async-mutex](https://www.npmjs.com/package/async-mutex)
+```
