@@ -1,5 +1,5 @@
 const UrlModel = require("../models/Url");
-const dns = require("dns");
+const dns = require('node:dns/promises')
 const { client } = require("../db/redis");
 
 const createShortUrl = async (req, res) => {
@@ -7,12 +7,7 @@ const createShortUrl = async (req, res) => {
     const url_requested = new URL(req.body.url);
     const hostnameURL = url_requested.hostname;
 
-    await dns.lookup(hostnameURL, (error) => {
-      if (error) {
-        return res.status(200).json({ error: "invalid url" });
-      }
-    });
-
+    await dns.lookup(hostnameURL).then((result) => {})
     const urlCounter = await UrlModel.countDocuments();
     const url = await UrlModel.create({
       original_url: req.body.url,
@@ -25,7 +20,7 @@ const createShortUrl = async (req, res) => {
   } catch (error) {
     res.status(200).json({ error: "invalid url" });
   }
-};
+}
 
 const getOriginalUrl = async (req, res) => {
   try {
