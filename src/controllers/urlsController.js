@@ -7,7 +7,7 @@ const createShortUrl = async (req, res) => {
     const url_requested = new URL(req.body.url);
     const hostnameURL = url_requested.hostname;
 
-    await dns.lookup(hostnameURL).then((result) => {})
+    await dns.lookup(hostnameURL)
     const urlCounter = await UrlModel.countDocuments();
     const url = await UrlModel.create({
       original_url: req.body.url,
